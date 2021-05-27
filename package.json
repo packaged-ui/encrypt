@@ -1,6 +1,6 @@
 {
-  "name": "encrypt-helper",
-  "version": "0.0.1",
+  "name": "@packaged-ui/encrypt",
+  "version": "0.0.2",
   "dependencies": {
     "node-forge": "^0.10.0"
   },
