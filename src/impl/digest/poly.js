@@ -2,8 +2,8 @@ import md from "node-forge/lib/md.all";
 
 /**
  * @param {string} data
- * @param {object} algorithm
- * @return {Promise<ArrayBuffer>}
+ * @param {string} algorithm
+ * @return {Promise<string>}
  */
 export function digestFn(data, algorithm = 'SHA-512')
 {

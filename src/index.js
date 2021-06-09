@@ -4,5 +4,11 @@ import {digestFn as nativeDigest} from './impl/digest/native.js';
 import {digestFn as polyDigest} from './impl/digest/poly.js';
 import {getNativeCrypto} from "./utils/crypto";
 
+/**
+ * @type {function(data: string, publicKey: (string|pkObj), algorithm: Object): Promise<ArrayBuffer>}
+ */
 export const encrypt = getNativeCrypto() ? nativeEncrypt : polyEncrypt;
+/**
+ * @type {function(data: string, algorithm: string=): Promise<string>}
+ */
 export const digest = getNativeCrypto() ? nativeDigest : polyDigest;
