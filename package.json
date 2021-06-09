@@ -1,6 +1,6 @@
 {
   "name": "@packaged-ui/encrypt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "node-forge": "^0.10.0"
   },
