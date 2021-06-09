@@ -156,12 +156,22 @@ describe('digest', function ()
   {
     before(function () {getNativeCrypto() || this.skip()});
 
-    it('equal', function ()
+    it('SHA-256', function ()
     {
       return Promise.all(
         [
           polyDigest(digestTestString, 'SHA-256'),
           nativeDigest(digestTestString, 'SHA-256'),
+        ]
+      ).then(results => {chai.assert.equal(...results)});
+    });
+
+    it('SHA-512', function ()
+    {
+      return Promise.all(
+        [
+          polyDigest(digestTestString, 'SHA-512'),
+          nativeDigest(digestTestString, 'SHA-512'),
         ]
       ).then(results => {chai.assert.equal(...results)});
     });
