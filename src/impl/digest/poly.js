@@ -5,7 +5,7 @@ import md from "node-forge/lib/md.all";
  * @param {object} algorithm
  * @return {Promise<ArrayBuffer>}
  */
-export function digestFn(data, algorithm)
+export function digestFn(data, algorithm = 'SHA-512')
 {
   return new Promise(
     resolve =>
