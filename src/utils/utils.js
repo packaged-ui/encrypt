@@ -55,3 +55,23 @@ export function b64tob64u(string)
 {
   return string.replace(_b64Search, c => _b64uTable[c]);
 }
+
+export function promisify(p)
+{
+  if(p instanceof Promise)
+  {
+    return p;
+  }
+  if(p.hasOwnProperty('oncomplete'))
+  {
+    return new Promise(
+      resolve =>
+      {
+        p.oncomplete = function (e)
+        {
+          resolve(e.target.result);
+        }
+      });
+  }
+  return p;
+}

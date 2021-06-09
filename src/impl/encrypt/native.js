@@ -1,11 +1,5 @@
-import {b64tob64u, stringToArrayBuffer} from "../utils/utils";
-
-const cryptoObj = window.crypto || window.webkitCrypto || window.mozCrypto || window.msCrypto;
-
-export function hasNative()
-{
-  return !!cryptoObj;
-}
+import {promisify, b64tob64u, stringToArrayBuffer} from "../../utils/utils";
+import {getNativeCrypto} from "../../utils/crypto";
 
 /**
  * @param {string|pkObj} publicKey
@@ -15,7 +9,8 @@ export function hasNative()
  */
 export function encryptFn(data, publicKey, algorithm)
 {
-  if(!hasNative())
+  const cryptoObj = getNativeCrypto();
+  if(!cryptoObj)
   {
     throw new Error('no native implementation');
   }
@@ -34,7 +29,7 @@ export function encryptFn(data, publicKey, algorithm)
         let importPromise;
         if(publicKey.n && publicKey.e)
         {
-          importPromise = _promisify(cryptoObj.subtle.importKey(
+          importPromise = promisify(cryptoObj.subtle.importKey(
             "jwk",
             {"kty": "RSA", "n": b64tob64u(publicKey.n), "e": b64tob64u(publicKey.e)},
             algorithm,
@@ -51,7 +46,7 @@ export function encryptFn(data, publicKey, algorithm)
             return;
           }
           const stripped = atob(publicKey.replace(/^-----(BEGIN|END).+$/mg, '').trim());
-          importPromise = _promisify(cryptoObj.subtle.importKey(
+          importPromise = promisify(cryptoObj.subtle.importKey(
             'spki',
             stringToArrayBuffer(stripped),
             algorithm,
@@ -64,7 +59,7 @@ export function encryptFn(data, publicKey, algorithm)
           (importedKey) =>
           {
             // encrypt using imported key
-            _promisify(cryptoObj.subtle.encrypt(algorithm, importedKey, stringToArrayBuffer(data)))
+            promisify(cryptoObj.subtle.encrypt(algorithm, importedKey, stringToArrayBuffer(data)))
               .then(resolve)
               .catch(reject)
           }).catch(reject);
@@ -76,22 +71,3 @@ export function encryptFn(data, publicKey, algorithm)
     });
 }
 
-function _promisify(p)
-{
-  if(p instanceof Promise)
-  {
-    return p;
-  }
-  if(p.hasOwnProperty('oncomplete'))
-  {
-    return new Promise(
-      resolve =>
-      {
-        p.oncomplete = function (e)
-        {
-          resolve(e.target.result);
-        }
-      });
-  }
-  return p;
-}

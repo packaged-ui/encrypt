@@ -1,4 +1,4 @@
-import {arrayBufferToHex, stringToArrayBuffer} from "../utils/utils";
+import {arrayBufferToHex, stringToArrayBuffer} from "../../utils/utils";
 import pki from 'node-forge/lib/pki';
 import md from 'node-forge/lib/md.all';
 import jsbn from 'node-forge/lib/jsbn';
