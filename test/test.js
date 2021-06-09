@@ -2,7 +2,7 @@ import {encryptFn as polyEncrypt} from "../src/impl/encrypt/poly";
 import {encryptFn as nativeEncrypt} from "../src/impl/encrypt/native";
 import {digestFn as polyDigest} from "../src/impl/digest/poly";
 import {digestFn as nativeDigest} from "../src/impl/digest/native";
-import {encrypt} from "../src";
+import {digest, encrypt} from "../src";
 import chai from "chai/chai";
 import chaiAsPromised from 'chai-as-promised';
 
@@ -18,14 +18,17 @@ describe('helper', function ()
   it('match', function ()
   {
     chai.assert.isFunction(encrypt);
+    chai.assert.isFunction(digest);
     if(window.crypto)
     {
       chai.assert.equal(getNativeCrypto(), window.crypto);
       chai.assert.equal(encrypt, nativeEncrypt);
+      chai.assert.equal(digest, nativeDigest);
     }
     else
     {
       chai.assert.equal(encrypt, polyEncrypt);
+      chai.assert.equal(digest, polyDigest);
     }
   });
 });
