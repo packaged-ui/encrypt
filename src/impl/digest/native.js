@@ -1,5 +1,5 @@
-import {getNativeCrypto} from "../../utils/crypto";
-import {arrayBufferToHex, promisify, stringToArrayBuffer} from "../../utils/utils";
+import {getNativeCrypto} from "../../utils/crypto.js";
+import {arrayBufferToHex, promisify, stringToArrayBuffer} from "../../utils/utils.js";
 
 /**
  * @param {string} data

@@ -1,5 +1,5 @@
-import {promisify, b64tob64u, stringToArrayBuffer} from "../../utils/utils";
-import {getNativeCrypto} from "../../utils/crypto";
+import {b64tob64u, promisify, stringToArrayBuffer} from "../../utils/utils.js";
+import {getNativeCrypto} from "../../utils/crypto.js";
 
 /**
  * @param {string|pkObj} publicKey

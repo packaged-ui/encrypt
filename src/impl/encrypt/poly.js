@@ -1,7 +1,7 @@
-import {arrayBufferToHex, stringToArrayBuffer} from "../../utils/utils";
-import pki from 'node-forge/lib/pki';
-import md from 'node-forge/lib/md.all';
-import jsbn from 'node-forge/lib/jsbn';
+import {arrayBufferToHex, stringToArrayBuffer} from "../../utils/utils.js";
+import pki from 'node-forge/lib/pki.js';
+import md from 'node-forge/lib/md.all.js';
+import jsbn from 'node-forge/lib/jsbn.js';
 
 /**
  * @param {string|pkObj} publicKey

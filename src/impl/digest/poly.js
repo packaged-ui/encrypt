@@ -1,4 +1,4 @@
-import md from "node-forge/lib/md.all";
+import md from "node-forge/lib/md.all.js";
 
 /**
  * @param {string} data
