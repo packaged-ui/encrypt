@@ -1,15 +1,15 @@
-import {encryptFn as polyEncrypt} from "../src/impl/encrypt/poly";
-import {encryptFn as nativeEncrypt} from "../src/impl/encrypt/native";
-import {digestFn as polyDigest} from "../src/impl/digest/poly";
-import {digestFn as nativeDigest} from "../src/impl/digest/native";
-import {digest, encrypt} from "../src";
-import chai from "chai/chai";
+import {encryptFn as polyEncrypt} from "../src/impl/encrypt/poly.js";
+import {encryptFn as nativeEncrypt} from "../src/impl/encrypt/native.js";
+import {digestFn as polyDigest} from "../src/impl/digest/poly.js";
+import {digestFn as nativeDigest} from "../src/impl/digest/native.js";
+import {digest, encrypt} from "../src/index.js";
+import chai from "chai";
 import chaiAsPromised from 'chai-as-promised';
 
-import {byteArrayToString, hexToArrayBuffer} from "../src/utils/utils";
-import pki from "node-forge/lib/pki";
-import sha512 from 'node-forge/lib/sha512';
-import {getNativeCrypto} from "../src/utils/crypto";
+import {byteArrayToString, hexToArrayBuffer} from "../src/utils/utils.js";
+import pki from "node-forge/lib/pki.js";
+import sha512 from 'node-forge/lib/sha512.js';
+import {getNativeCrypto} from "../src/utils/crypto.js";
 
 chai.use(chaiAsPromised);
 
