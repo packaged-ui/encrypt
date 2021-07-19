@@ -1,15 +1,26 @@
 # This workflow will tag a release on github when the package.json version changes on master, and publish package to npm and github
 
-name: Tag Release
+name: Test & Release
 
-on:
-  push:
-    branches:
-      - master
+on: [ push,  pull_request ]
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
   release:
     name: Release
+    needs: [ test ]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
